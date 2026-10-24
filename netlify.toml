@@ -1,0 +1,49 @@
+[build]
+  command = "npm run build"
+  publish = "frontend/catalogo-autos-frontend/dist"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Redirecciones para la API Serverless
+[[redirects]]
+  from = "/api/auth/*"
+  to = "/.netlify/functions/auth/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/autos"
+  to = "/.netlify/functions/autos"
+  status = 200
+
+[[redirects]]
+  from = "/api/autos/*"
+  to = "/.netlify/functions/autos/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/fabricantes"
+  to = "/.netlify/functions/fabricantes"
+  status = 200
+
+[[redirects]]
+  from = "/api/fabricantes/*"
+  to = "/.netlify/functions/fabricantes/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/categorias"
+  to = "/.netlify/functions/categorias"
+  status = 200
+
+[[redirects]]
+  from = "/api/categorias/*"
+  to = "/.netlify/functions/categorias/:splat"
+  status = 200
+
+# Redirección SPA para Vue Router (modo history)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

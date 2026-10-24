@@ -1,0 +1,20 @@
+id;tipo_motor;traccion;aceleracion_0_100;velocidad_maxima
+1;W16 biturbo;AWD;2.0;490
+2;V8 biturbo;AWD;2.6;500
+3;Eléctrico (4 motores);AWD;1.8;412
+4;V8 biturbo;RWD;2.5;532
+5;W16 quad-turbo;AWD;2.4;490
+6;Eléctrico (4 motores);AWD;1.9;350
+7;V8 biturbo;AWD;2.0;455
+8;Eléctrico ;AWD;1.7;400
+9;Eléctrico;AWD;1.8;380
+10;V8 biturbo;RWD;2.5;420
+11;Híbrido V12;RWD;2.5;350
+12;Híbrido V12;AWD;2.5;350
+13;V12 atmosférico;RWD;2.9;340
+14;V12 biturbo;RWD;3;370
+15;Híbrido V8;RWD;2.8;400
+16;Híbrido V8;AWD;2.8;350
+17;Híbrido V8;AWD;2.5;345
+18;V10;AWD;2.9;325
+19;V6 biturbo;RWD;2.9;325

@@ -1,0 +1,21 @@
+id;modelo;marca;anio;potencia;imagen;fabricante_id;categoria_id
+1;Bolide;Bugatti;2020;1825;bugatti_bolide.jpg;1;1
+2;Venom F5;Hennessey;2019;1817;hennessey_venom.jpg;2;2
+3;Nevera;Rimac;2021;1888;rimac_nevera.jpg;3;3
+4;Jesko Absolut;Koenigsegg;2020;1600;koenigsegg_jesko.jpg;4;4
+5;Chiron Super Sport 300+;Bugatti;2019;1577;bugatti_chiron.jpg;1;5
+6;Evija;Lotus;2020;2000;lotus_evija.jpg;5;6
+7;Battista;Pininfarina;2020;1900;pininfarina_battista.jpg;6;6
+8;Tuatara;SSC;2020;1750;ssc_tuatara.jpg;7;7
+9;Owl;Aspark;2020;1985;aspark_owl.jpg;8;8
+10;Vayanne;Deus;2022;2243;deus_vayanne.jpg;9;9
+11;Missile;Corbellati;2018;1800;corbellati_missile.jpg;10;10
+12;Valkyrie;Aston Martin;2021;1160;aston_valkyrie.jpg;11;11
+13;Revuelto;Lamborghini;2023;1001;lamborghini_revuelto.jpg;12;12
+14;Daytona SP3;Ferrari;2022;840;ferrari_daytona.jpg;13;13
+15;Huayra Roadster;Pagani;2017;738;pagani_huayra.jpg;14;14
+16;Regera;Koenigsegg;2016;1700;koenigsegg_regera.jpg;4;15
+17;P1;McLaren;2013;903;mclaren_p1.jpg;15;16
+18;918 Spyder;Porsche;2015;877;porsche_918.jpg;16;17
+19;Huracán Performante;Lamborghini;2017;600;lamborghini_huracan.jpg;12;18
+20;MC20;Maserati;2020;630;maserati_mc20.jpg;17;19

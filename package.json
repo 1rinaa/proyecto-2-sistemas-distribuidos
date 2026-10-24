@@ -1,0 +1,19 @@
+{
+  "name": "catalogo-autos-fullstack",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Proyecto 2 - Catálogos temáticos con MongoDB Atlas, Netlify Functions y Autenticación JWT",
+  "scripts": {
+    "dev:api": "node scripts/dev-server.js",
+    "seed": "node scripts/seed-mongodb.js",
+    "test:functions": "node scripts/test-functions.js",
+    "build:frontend": "npm --prefix frontend/catalogo-autos-frontend run build",
+    "build": "npm --prefix frontend/catalogo-autos-frontend install && npm run build:frontend"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.10.0"
+  }
+}
