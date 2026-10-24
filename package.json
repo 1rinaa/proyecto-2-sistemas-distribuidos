@@ -8,7 +8,8 @@
     "seed": "node scripts/seed-mongodb.js",
     "test:functions": "node scripts/test-functions.js",
     "build:frontend": "npm --prefix frontend/catalogo-autos-frontend run build",
-    "build": "npm --prefix frontend/catalogo-autos-frontend install && npm run build:frontend"
+    "build": "npm --prefix frontend/catalogo-autos-frontend install && npm run build:frontend",
+    "zip": "node scripts/generate-zip.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
