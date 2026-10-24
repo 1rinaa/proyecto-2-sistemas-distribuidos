@@ -129,28 +129,38 @@ export default {
 
     // Abrir formulario para editar
     editarCategoria(categoria) {
+      this.mostrarDetalle = false;
       this.editandoCat = categoria;
       this.mostrarForm = true;
+      this.$nextTick(() => {
+        const formEl = document.querySelector(".form-wrapper");
+        if (formEl) {
+          formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 250, behavior: "smooth" });
+        }
+      });
     },
 
     // Guardar (crear o actualizar)
     async guardarCategoria(data) {
       try {
-        if (this.editandoCat) {
-          // Actualizar categoría existente
+        const esEdicion = !!this.editandoCat;
+        if (esEdicion) {
           await this.updateCategoria({
             id: this.editandoCat.id,
             categoria: data,
           });
+          this.$toast.success("Categoría modificada exitosamente");
         } else {
-          // Crear nueva categoría
           await this.createCategoria(data);
+          this.$toast.success("Categoría creada exitosamente");
         }
         this.mostrarForm = false;
         this.editandoCat = null;
       } catch (error) {
         console.error("Error guardando categoría:", error);
-        alert("Error al guardar la categoría");
+        this.$toast.error("Error al guardar la categoría");
       }
     },
 
@@ -165,9 +175,10 @@ export default {
       if (confirm("¿Eliminar esta categoría?")) {
         try {
           await this.deleteCategoria(id);
+          this.$toast.success("Categoría eliminada exitosamente");
         } catch (error) {
           console.error("Error eliminando categoría:", error);
-          alert("Error al eliminar la categoría");
+          this.$toast.error("Error al eliminar la categoría");
         }
       }
     },

@@ -280,11 +280,13 @@ export default {
 
         const res = await this.updateProfile(payload);
         this.successMsg = res.message || "Perfil actualizado con éxito.";
+        this.$toast.success("Perfil actualizado exitosamente");
         this.passwordActual = "";
         this.passwordNuevo = "";
         this.passwordConfirmar = "";
       } catch (err) {
         this.errorMsg = err.message || "Error al actualizar los datos.";
+        this.$toast.error(this.errorMsg);
       }
     },
   },

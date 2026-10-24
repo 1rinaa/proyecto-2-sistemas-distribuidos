@@ -153,6 +153,7 @@
       :auto="autoSeleccionado"
       :visible="mostrarDetalle"
       @cerrar="mostrarDetalle = false"
+      @editar="editarAuto"
     />
   </div>
 </template>
@@ -313,22 +314,34 @@ export default {
     // ===== CRUD =====
     async handleGuardarAuto(autoData) {
       try {
-        if (this.autoEditando) {
+        const esEdicion = !!this.autoEditando;
+        if (esEdicion) {
           await this.updateAuto({ id: this.autoEditando.id, auto: autoData });
+          this.$toast.success("Auto modificado exitosamente");
         } else {
           await this.createAuto(autoData);
+          this.$toast.success("Auto agregado al catálogo exitosamente");
         }
         this.mostrarFormulario = false;
         this.autoEditando = null;
       } catch (error) {
         console.error("Error guardando auto:", error);
-        alert("Error al guardar el auto");
+        this.$toast.error("Error al guardar el auto en la base de datos");
       }
     },
 
     editarAuto(auto) {
+      this.mostrarDetalle = false;
       this.autoEditando = auto;
       this.mostrarFormulario = true;
+      this.$nextTick(() => {
+        const formEl = document.querySelector(".form-wrapper");
+        if (formEl) {
+          formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 250, behavior: "smooth" });
+        }
+      });
     },
 
     cancelarEdicion() {
@@ -337,12 +350,13 @@ export default {
     },
 
     async eliminarAuto(id) {
-      if (confirm("¿Estás seguro de eliminar este auto?")) {
+      if (confirm("¿Estás seguro de eliminar este auto del catálogo?")) {
         try {
           await this.deleteAuto(id);
+          this.$toast.success("Auto eliminado exitosamente");
         } catch (error) {
           console.error("Error eliminando auto:", error);
-          alert("Error al eliminar el auto");
+          this.$toast.error("Error al eliminar el auto");
         }
       }
     },
@@ -355,7 +369,7 @@ export default {
         this.mostrarDetalle = true;
       } catch (error) {
         console.error("Error cargando detalles:", error);
-        alert("Error al cargar los detalles del auto");
+        this.$toast.error("Error al cargar los detalles del auto");
       }
     },
   },

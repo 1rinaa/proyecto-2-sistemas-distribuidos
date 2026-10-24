@@ -130,30 +130,38 @@ export default {
 
     // ✅ Abrir formulario para editar
     editarFabricante(fabricante) {
-      console.log("📝 Editando fabricante:", fabricante); // Debug
+      this.mostrarDetalle = false;
       this.editandoFab = fabricante;
       this.mostrarForm = true;
+      this.$nextTick(() => {
+        const formEl = document.querySelector(".form-wrapper");
+        if (formEl) {
+          formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 250, behavior: "smooth" });
+        }
+      });
     },
 
     // ✅ Guardar (crear o actualizar)
     async guardarFabricante(data) {
       try {
-        if (this.editandoFab) {
-          console.log("🔄 Actualizando fabricante:", this.editandoFab.id, data); // Debug
-          // Actualizar fabricante existente
+        const esEdicion = !!this.editandoFab;
+        if (esEdicion) {
           await this.updateFabricante({
             id: this.editandoFab.id,
             fabricante: data,
           });
+          this.$toast.success("Marca modificada exitosamente");
         } else {
-          // Crear nuevo fabricante
           await this.createFabricante(data);
+          this.$toast.success("Marca creada exitosamente");
         }
         this.mostrarForm = false;
         this.editandoFab = null;
       } catch (error) {
         console.error("❌ Error guardando fabricante:", error);
-        alert("Error al guardar la marca");
+        this.$toast.error("Error al guardar la marca");
       }
     },
 
@@ -168,9 +176,10 @@ export default {
       if (confirm("¿Eliminar esta marca?")) {
         try {
           await this.deleteFabricante(id);
+          this.$toast.success("Marca eliminada exitosamente");
         } catch (error) {
           console.error("❌ Error eliminando fabricante:", error);
-          alert("Error al eliminar la marca");
+          this.$toast.error("Error al eliminar la marca");
         }
       }
     },

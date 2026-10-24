@@ -129,6 +129,7 @@
 
     <main class="main-content">
       <router-view />
+      <SnackbarToast />
     </main>
 
     <!-- Footer completo -->
@@ -176,9 +177,13 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import SnackbarToast from "@/components/Common/SnackbarToast.vue";
 
 export default {
   name: "App",
+  components: {
+    SnackbarToast,
+  },
   computed: {
     ...mapGetters(["isAuthenticated", "currentUser"]),
   },
@@ -186,6 +191,7 @@ export default {
     ...mapActions(["logout"]),
     handleLogout() {
       this.logout();
+      this.$toast.info("Has cerrado sesión correctamente.");
       if (this.$route.path !== "/") {
         this.$router.push("/");
       }

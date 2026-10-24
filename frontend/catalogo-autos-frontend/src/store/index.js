@@ -30,6 +30,8 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+let toastTimeout = null;
+
 const store = new Vuex.Store({
   state: {
     autos: [],
@@ -42,6 +44,14 @@ const store = new Vuex.Store({
     user: savedUser,
     authLoading: false,
     authError: null,
+
+    // Notificaciones Snackbar / Toast
+    toast: {
+      show: false,
+      message: "",
+      type: "success",
+      duration: 3500,
+    },
   },
   getters: {
     isAuthenticated: (state) => !!state.token,
@@ -98,6 +108,19 @@ const store = new Vuex.Store({
     },
     SET_AUTH_ERROR(state, error) {
       state.authError = error;
+    },
+
+    // Mutaciones Toast / Snackbar
+    SET_TOAST(state, { message, type = "success", duration = 3500 }) {
+      state.toast = {
+        show: true,
+        message,
+        type,
+        duration,
+      };
+    },
+    CLEAR_TOAST(state) {
+      state.toast.show = false;
     },
   },
   actions: {
@@ -291,6 +314,31 @@ const store = new Vuex.Store({
         console.error("Error deleting categoria:", error);
         throw error;
       }
+    },
+
+    // ==========================================
+    // NOTIFICACIONES TOAST / SNACKBAR
+    // ==========================================
+    showToast({ commit }, payload) {
+      const data =
+        typeof payload === "string"
+          ? { message: payload, type: "success", duration: 3500 }
+          : { duration: 3500, type: "success", ...payload };
+
+      commit("SET_TOAST", data);
+
+      if (toastTimeout) {
+        clearTimeout(toastTimeout);
+      }
+      toastTimeout = setTimeout(() => {
+        commit("CLEAR_TOAST");
+      }, data.duration || 3500);
+    },
+    hideToast({ commit }) {
+      if (toastTimeout) {
+        clearTimeout(toastTimeout);
+      }
+      commit("CLEAR_TOAST");
     },
   },
 });

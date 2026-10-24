@@ -164,9 +164,10 @@ export default {
           correo: this.correo,
           password: this.password,
         });
+        this.$toast.success("¡Cuenta creada exitosamente! Bienvenido.");
         this.$router.push("/autos");
       } catch (err) {
-        // Error manejado en Vuex
+        this.$toast.error(this.authError || "Error al crear la cuenta");
       }
     },
   },

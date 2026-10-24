@@ -118,10 +118,11 @@ export default {
           correo: this.correo,
           password: this.password,
         });
+        this.$toast.success("¡Inicio de sesión exitoso! Bienvenido.");
         const redirectPath = this.$route.query.redirect || "/autos";
         this.$router.push(redirectPath);
       } catch (err) {
-        // Error manejado en Vuex
+        this.$toast.error(this.authError || "Error al iniciar sesión");
       }
     },
   },

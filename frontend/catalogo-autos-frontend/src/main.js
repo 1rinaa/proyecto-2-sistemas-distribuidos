@@ -17,6 +17,24 @@ Vue.config.productionTip = false;
 // URL base de API (relativa en Netlify para que use las funciones serverless)
 Vue.prototype.$apiUrl = process.env.VUE_APP_API_URL || "";
 
+// Helper global de Notificaciones Toast / Snackbar
+const toastHelper = (message, type = "success", duration = 3500) => {
+  store.dispatch("showToast", { message, type, duration });
+};
+toastHelper.success = (message, duration = 3500) => {
+  store.dispatch("showToast", { message, type: "success", duration });
+};
+toastHelper.error = (message, duration = 4000) => {
+  store.dispatch("showToast", { message, type: "error", duration });
+};
+toastHelper.warning = (message, duration = 3500) => {
+  store.dispatch("showToast", { message, type: "warning", duration });
+};
+toastHelper.info = (message, duration = 3500) => {
+  store.dispatch("showToast", { message, type: "info", duration });
+};
+Vue.prototype.$toast = toastHelper;
+
 // Interceptor de respuesta para manejar expiración de token (401)
 axios.interceptors.response.use(
   (response) => response,
